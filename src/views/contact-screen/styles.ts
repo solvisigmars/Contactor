@@ -6,6 +6,12 @@ export default StyleSheet.create({
     padding: 10,
     gap: 10,
   },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+  },
   button: {
     padding: 12,
     borderWidth: 1,
