@@ -1,11 +1,11 @@
 import {
-  readContactFile,
-  writeContactFile,
   deleteContactFile,
-  listContactFiles
-} from './filesystem-service';
+  listContactFiles,
+  readContactFile,
+  writeContactFile
+} from "./filesystem-service";
 
-import { generateUUID } from './uuid-service';
+import { generateUUID } from "./uuid-service";
 
 export interface Contact {
   id: string;         // UUID
@@ -27,7 +27,7 @@ export async function getAllContacts(): Promise<Contact[]> {
 
   // Sort alphabetically ascending
   return contacts.sort((a, b) =>
-    a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+    a.name.localeCompare(b.name, "en", { sensitivity: "base" })
   );
 }
 
