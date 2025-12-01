@@ -5,14 +5,8 @@ import {
   writeContactFile
 } from "./filesystem-service";
 
+import { Contact } from "../types/Contact";
 import { generateUUID } from "./uuid-service";
-
-export interface Contact {
-  id: string;         // UUID
-  name: string;
-  phoneNumber: string;
-  photo: string | null; // URI path
-}
 
 // Load all contacts
 export async function getAllContacts(): Promise<Contact[]> {
@@ -35,7 +29,7 @@ export async function getAllContacts(): Promise<Contact[]> {
 export async function createContact(
   name: string,
   phoneNumber: string,
-  photo: string | null
+  image: string | null
 ) {
   const id = generateUUID();
   const fileName = `${name}-${id}.json`;
@@ -44,7 +38,7 @@ export async function createContact(
     id,
     name,
     phoneNumber,
-    photo,
+    image,
   };
 
   await writeContactFile(fileName, newContact);

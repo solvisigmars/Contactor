@@ -32,7 +32,7 @@ export default function ContactsScreen() {
       visible.push(c);
     }
   }
-  
+
   return (
     <View style= {styles.container}>
       <Text style = {styles.title}>Contacts</Text>
@@ -40,7 +40,7 @@ export default function ContactsScreen() {
       <SearchBar search = {search} setSearch = {setSearch} />
 
       {/* Render Contacts Lists */}
-      <ContactsList list = { visible } />
+      <ContactsList list={ visible } />
       {/* Redner Create New Contact */}
       <CreateContactButton />
       

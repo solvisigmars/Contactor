@@ -14,10 +14,13 @@ export default function ContactItem ({contact}: Props){
           <Image style = {styles.thumbnail} source={{uri: contact.image}} />
         ): (
           <View style = {styles.placeholder}>
-            <Text style = {styles.textPlaceholer}>contact.name[0].toUpperCase()</Text>
+            <Text style = {styles.textPlaceholer}>{contact.name[0].toUpperCase()}</Text>
           </View>
         )
         }
+        <Text style={styles.nameText}>
+          {contact.name}
+        </Text>
       </View>
     </TouchableOpacity>
   )

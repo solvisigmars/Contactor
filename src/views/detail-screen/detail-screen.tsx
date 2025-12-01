@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from "react-native";
 
-import { getContact } from '@/src/services/contact-service';
-import styles from './styles';
+import { getContact } from "@/src/services/contact-service";
+import styles from "./styles";
 
 export default function ContactDetailScreen() {
   const { id } = useLocalSearchParams();     // Filename (e.g. "Anna-932jd.json")
@@ -45,7 +45,7 @@ export default function ContactDetailScreen() {
         source={
           contact.photo
             ? { uri: contact.photo }
-            : require('@/assets/images/icon.png')
+            : require("@/assets/images/icon.png")
         }
         style={styles.photo}
       />

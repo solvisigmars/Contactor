@@ -1,18 +1,18 @@
+import { background, blue, darkGray } from "@/src/styles/colors";
 import { StyleSheet } from "react-native";
-import { background, blue, darkGray } from '@/src/styles/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: background,
     padding: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
 
   center: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   photo: {
@@ -20,12 +20,12 @@ export default StyleSheet.create({
     height: 160,
     borderRadius: 80,
     marginBottom: 20,
-    backgroundColor: '#ddd',
+    backgroundColor: "#ddd",
   },
 
   name: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: darkGray,
     marginBottom: 10,
   },
@@ -45,8 +45,8 @@ export default StyleSheet.create({
   },
 
   editButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });

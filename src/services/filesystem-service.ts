@@ -1,8 +1,7 @@
-import * as FileSystem from "expo-file-system";
-import { documentDirectory } from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 
 // Folder where all contacts are stored
-const CONTACTS_DIR = `${documentDirectory}contacts/`;
+const CONTACTS_DIR = (FileSystem.documentDirectory ?? "") + "contacts/";
 
 // Ensure the contacts folder exists
 export async function ensureContactsDir() {
@@ -13,7 +12,7 @@ export async function ensureContactsDir() {
   }
 }
 
-// Read a contact file (JSON)
+// Read a contact file (JSON)s
 export async function readContactFile(filename: string) {
   await ensureContactsDir();
 
