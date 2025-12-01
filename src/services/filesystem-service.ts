@@ -1,53 +1,61 @@
+import { Directory, File, Paths } from "expo-file-system";
 import * as FileSystem from "expo-file-system/legacy";
 
-// Folder where all contacts are stored
-const CONTACTS_DIR = (FileSystem.documentDirectory ?? "") + "contacts/";
+// Create contacts directory inside device storage
+export const CONTACTS_DIR = new Directory(Paths.document, "contacts");
 
-// Ensure the contacts folder exists
+// Ensure folder exists
 export async function ensureContactsDir() {
-  const dir = await FileSystem.getInfoAsync(CONTACTS_DIR);
-
-  if (!dir.exists) {
-    await FileSystem.makeDirectoryAsync(CONTACTS_DIR, { intermediates: true });
+  if (!CONTACTS_DIR.exists) {
+    CONTACTS_DIR.create();
   }
 }
 
-// Read a contact file (JSON)s
+// Read JSON contact file
 export async function readContactFile(filename: string) {
   await ensureContactsDir();
 
-  const path = CONTACTS_DIR + filename;
+  const file = new File(CONTACTS_DIR.uri, filename);
 
-  const content = await FileSystem.readAsStringAsync(path, {
+  if (!file.exists) {
+    throw new Error(`Contact file does not exist: ${filename}`);
+  }
+
+  // ✔ REAL API that works in Expo
+  const content = await FileSystem.readAsStringAsync(file.uri, {
     encoding: FileSystem.EncodingType.UTF8,
   });
 
   return JSON.parse(content);
 }
 
-// Write a contact file (JSON)
+// Write JSON file
 export async function writeContactFile(filename: string, data: object) {
   await ensureContactsDir();
 
-  const path = CONTACTS_DIR + filename;
+  const file = new File(CONTACTS_DIR.uri, filename);
 
-  await FileSystem.writeAsStringAsync(path, JSON.stringify(data), {
+  await FileSystem.writeAsStringAsync(file.uri, JSON.stringify(data), {
     encoding: FileSystem.EncodingType.UTF8,
   });
 }
 
-// Delete a contact file
+// Delete JSON file
 export async function deleteContactFile(filename: string) {
   await ensureContactsDir();
 
-  const path = CONTACTS_DIR + filename;
+  const file = new File(CONTACTS_DIR.uri, filename);
 
-  await FileSystem.deleteAsync(path, { idempotent: true });
+  if (file.exists) {
+    await FileSystem.deleteAsync(file.uri, { idempotent: true });
+  }
 }
 
 // List all contact files
 export async function listContactFiles() {
   await ensureContactsDir();
 
-  return await FileSystem.readDirectoryAsync(CONTACTS_DIR);
+  return CONTACTS_DIR.list()
+    .filter((item) => item instanceof File)
+    .map((file) => (file as File).name);
 }
