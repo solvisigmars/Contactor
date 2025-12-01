@@ -1,6 +1,6 @@
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from "expo-file-system";
 
-const CONTACTS_DIR = FileSystem.documentDirectory + 'contacts/';
+const CONTACTS_DIR = FileSystem.documentDirectory + "contacts/";
 
 // Ensure contacts folder exists
 export async function ensureContactsDir() {
