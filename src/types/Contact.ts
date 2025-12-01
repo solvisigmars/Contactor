@@ -1,6 +1,6 @@
 export interface Contact{
   id: string;
   name: string;
-  phoneNumber: number;
+  phoneNumber: string;
   image: string | null;
 }
