@@ -1,41 +1,54 @@
 import * as FileSystem from "expo-file-system";
+import { documentDirectory } from "expo-file-system";
 
-const CONTACTS_DIR = FileSystem.documentDirectory + "contacts/";
+// Folder where all contacts are stored
+const CONTACTS_DIR = `${documentDirectory}contacts/`;
 
-// Ensure contacts folder exists
+// Ensure the contacts folder exists
 export async function ensureContactsDir() {
   const dir = await FileSystem.getInfoAsync(CONTACTS_DIR);
 
   if (!dir.exists) {
-    await FileSystem.makeDirectoryAsync(CONTACTS_DIR);
+    await FileSystem.makeDirectoryAsync(CONTACTS_DIR, { intermediates: true });
   }
 }
 
-// Read a JSON contact file
+// Read a contact file (JSON)
 export async function readContactFile(filename: string) {
   await ensureContactsDir();
+
   const path = CONTACTS_DIR + filename;
 
-  const file = await FileSystem.readAsStringAsync(path);
-  return JSON.parse(file);
+  const content = await FileSystem.readAsStringAsync(path, {
+    encoding: FileSystem.EncodingType.UTF8,
+  });
+
+  return JSON.parse(content);
 }
 
-// Save a JSON contact file
+// Write a contact file (JSON)
 export async function writeContactFile(filename: string, data: object) {
   await ensureContactsDir();
+
   const path = CONTACTS_DIR + filename;
 
-  await FileSystem.writeAsStringAsync(path, JSON.stringify(data));
+  await FileSystem.writeAsStringAsync(path, JSON.stringify(data), {
+    encoding: FileSystem.EncodingType.UTF8,
+  });
 }
 
 // Delete a contact file
 export async function deleteContactFile(filename: string) {
+  await ensureContactsDir();
+
   const path = CONTACTS_DIR + filename;
+
   await FileSystem.deleteAsync(path, { idempotent: true });
 }
 
 // List all contact files
 export async function listContactFiles() {
   await ensureContactsDir();
+
   return await FileSystem.readDirectoryAsync(CONTACTS_DIR);
 }

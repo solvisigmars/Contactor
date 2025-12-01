@@ -5,4 +5,5 @@ export function generateUUID() {
   return uuidv4();
 }
 
-//Þú þarft að installa: npm install uuid react-native-get-random-values//
+//npm install uuid
+//npm install react-native-get-random-values
