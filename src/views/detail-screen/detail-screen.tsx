@@ -1,16 +1,16 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Image,
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from "react-native";
 
-import { getContact } from '@/src/services/contact-service';
-import { Contact } from '@/src/types/Contact';
-import styles from './styles';
+import { getContact } from "@/src/services/contact-service";
+import { Contact } from "@/src/types/Contact";
+import styles from "./styles";
 
 export default function ContactDetailScreen() {
   const { id } = useLocalSearchParams();      // filename (Anna-uuid.json)

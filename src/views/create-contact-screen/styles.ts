@@ -31,7 +31,8 @@ export default StyleSheet.create({
     alignSelf: "center",
   },
   buttonText: {
-    fontSize: 15,
+    fontSize: 12,
+    color: "white",
     fontWeight: "bold"
   },
   button: {

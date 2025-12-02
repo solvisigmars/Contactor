@@ -1,3 +1,4 @@
+import { Contact } from "../types/Contact";
 import {
   deleteContactFile,
   listContactFiles,
@@ -5,7 +6,6 @@ import {
   writeContactFile
 } from "./filesystem-service";
 import { saveImageToAppStorage } from "./image-service";
-import { Contact } from "../types/Contact";
 import { generateUUID } from "./uuid-service";
 
 // Load all contacts
@@ -24,7 +24,7 @@ export async function getAllContacts(): Promise<Contact[]> {
   }
 
   return contacts.sort((a, b) =>
-    a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+    a.name.localeCompare(b.name, "en", { sensitivity: "base" })
   );
 }
 

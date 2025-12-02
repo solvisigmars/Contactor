@@ -1,4 +1,5 @@
 import { createContact } from "@/src/services/contact-service";
+import { takePhoto } from "@/src/services/image-service";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -16,6 +17,15 @@ export default function NewContactScreen() {
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
+  }
+
+  async function handleTakePhoto() {
+    const uri = await takePhoto();
+    if (uri !== "") {
+      setImage(uri);
+    }
+      
+    
   }
 
   return (
@@ -39,6 +49,10 @@ export default function NewContactScreen() {
 
       <TouchableOpacity onPress={pickImage} style={styles.button}>
         <Text style={styles.buttonText}>Select Image</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleTakePhoto} style={styles.button}>
+        <Text style={styles.buttonText}>Take Photo</Text>
       </TouchableOpacity>
 
       <Image
