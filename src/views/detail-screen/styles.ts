@@ -49,4 +49,23 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
   },
+
+  placeholder: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  
+  textPlaceholder: {
+    fontSize: 68,
+    fontWeight: "bold",
+    color: "#555",
+  },
+  
 });
+
+

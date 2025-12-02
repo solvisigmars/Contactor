@@ -4,7 +4,7 @@ import {
   readContactFile,
   writeContactFile
 } from "./filesystem-service";
-
+import { saveImageToAppStorage } from "./image-service";
 import { Contact } from "../types/Contact";
 import { generateUUID } from "./uuid-service";
 
@@ -16,14 +16,19 @@ export async function getAllContacts(): Promise<Contact[]> {
 
   for (const fileName of files) {
     const contact = await readContactFile(fileName);
-    contacts.push(contact);
+
+    contacts.push({
+      ...contact,
+      filename: fileName, // now valid
+    });
   }
 
-  // Sort alphabetically ascending
   return contacts.sort((a, b) =>
-    a.name.localeCompare(b.name, "en", { sensitivity: "base" })
+    a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
   );
 }
+
+
 
 // Create new contact
 export async function createContact(
@@ -34,11 +39,17 @@ export async function createContact(
   const id = generateUUID();
   const fileName = `${name}-${id}.json`;
 
+  let finalImage = null;
+
+  if (image) {
+    finalImage = await saveImageToAppStorage(image);
+  }
+
   const newContact: Contact = {
     id,
     name,
     phoneNumber,
-    image,
+    image: finalImage,
   };
 
   await writeContactFile(fileName, newContact);
