@@ -1,6 +1,8 @@
 import { Directory, File, Paths } from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { Alert, Linking } from "react-native";
+import { generateUUID } from "./uuid-service";
+
 
 export const CONTACT_PHOTO_DIR = new Directory(
   Paths.document,
@@ -91,21 +93,20 @@ async function ensureDir() {
   }
 }
 
-/**
- * Save image inside app storage
- */
+
 export async function saveImageToAppStorage(
   sourceUri: string
 ): Promise<string> {
   await ensureDir();
 
-  const parts = sourceUri.split("/");
-  const originalName = parts[parts.length - 1];
-  const newFile = new File(CONTACT_PHOTO_DIR.uri, originalName);
+  // Generate a unique filename every time
+  const extension = sourceUri.split(".").pop() || "jpg";
+  const uniqueName = `${generateUUID()}.${extension}`;
 
+  const newFile = new File(CONTACT_PHOTO_DIR.uri, uniqueName);
   const sourceFile = new File(sourceUri);
 
-  // Copy into the app folder
+  // Copy into the app folder (avoid conflicts)
   sourceFile.copy(newFile);
 
   return newFile.uri; // Permanent location
