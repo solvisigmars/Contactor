@@ -1,6 +1,7 @@
 import { background, blue, darkGray } from "@/src/styles/colors";
 import { StyleSheet } from "react-native";
 
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -48,7 +49,67 @@ export default StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
     alignSelf: "center",
     marginVertical: 20,
   },
+
+
+  imageWrapper: {
+    position: "relative",
+    alignSelf: "center",
+    marginVertical: 20,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+  
+    // ⭐ shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  
+
+  removeImageButton: {
+    position: "absolute",
+    top: 5,          
+    right: 13,        
+    backgroundColor: "rgba(0,0,0,0.55)",
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 20,
+  },
+  
+  removeImageText: {
+    color: "white",
+    fontSize: 16,     
+    lineHeight: 16,
+    fontWeight: "400" 
+  },
+
+  placeholder: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    marginVertical: 20,
+  },
+
+  placeholderText: {
+    fontSize: 48,      
+    fontWeight: "600",
+    color: "#555",
+  },
+
+  
 });
