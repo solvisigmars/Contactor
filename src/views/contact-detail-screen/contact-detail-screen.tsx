@@ -1,6 +1,13 @@
-import { useFocusEffect, useLocalSearchParams } from "expo-router";
-import React, { useCallback, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { useLocalSearchParams, useFocusEffect } from 'expo-router';
+import React, { useState, useCallback } from 'react';
+import { 
+  Image, 
+  Text, 
+  View, 
+  ActivityIndicator, 
+  TouchableOpacity, 
+  Linking 
+} from 'react-native';
 
 import EditContactButton from "@/src/components/edit-contact-button/edit-contact-button";
 import { getContact } from "@/src/services/contact-service";
@@ -37,6 +44,15 @@ export default function ContactDetailScreen() {
       };
     }, [id])
   );
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   if (!contact) {
     return (
       <View style={styles.center}>
@@ -47,6 +63,11 @@ export default function ContactDetailScreen() {
 
   return (
     <View style={styles.container}>
+
+      {/* ⭐ EDIT BUTTON (top-right inside screen) */}
+      <View style={styles.editButtonContainer}>
+        <EditContactButton filename={id as string} />
+      </View>
 
       {/* PHOTO OR PLACEHOLDER */}
       {contact.image ? (
@@ -63,8 +84,14 @@ export default function ContactDetailScreen() {
       <Text style={styles.name}>{contact.name}</Text>
       <Text style={styles.phone}>{contact.phoneNumber}</Text>
 
-      {/* EDIT BUTTON */}
-      <EditContactButton filename={id as string} />
+      {/* ⭐ GREEN CALL BUTTON */}
+      <TouchableOpacity
+        style={styles.callButton}
+        onPress={() => Linking.openURL(`tel:${contact.phoneNumber}`)}
+      >
+        <Text style={styles.callButtonText}>Call</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
