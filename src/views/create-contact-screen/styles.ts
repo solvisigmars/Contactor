@@ -54,8 +54,7 @@ export default StyleSheet.create({
     borderRadius: 75,
     backgroundColor: "#ddd",
     justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden", // keeps image inside circle
+    alignItems: "center",    
   },
 
   imagePreview: {
