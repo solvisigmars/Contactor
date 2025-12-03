@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from 'react-native';
 
 type Props = {
-  filename: string; // example: "Anna-81b2b1.json"
+  filename: string; 
 };
 
 export default function EditContactButton({ filename }: Props) {

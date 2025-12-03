@@ -4,20 +4,17 @@ import { Contact } from "../types/Contact";
 import { CONTACTS_DIR, writeContactFile } from "./filesystem-service";
 import { generateUUID } from "./uuid-service";
 export async function importContactFromOs() {
-  // Request permission
   const { status } = await Contacts.requestPermissionsAsync();
   if (status !== "granted") {
     throw new Error("Permission denied")
   }
 
-  // Fetch contacts 
   const { data } = await Contacts.getContactsAsync({
     fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers, Contacts.Fields.Image]
   });
 
   const imported: Contact[] = [];
 
-  // Ensure directory exists
   const dir = await FileSystem.getInfoAsync(CONTACTS_DIR.uri);
   if (!dir.exists) {
     await FileSystem.makeDirectoryAsync(CONTACTS_DIR.uri, { intermediates: true });

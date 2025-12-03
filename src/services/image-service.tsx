@@ -14,15 +14,10 @@ enum PermissionType {
   CameraRoll,
 }
 
-/**
- * Request permissions safely.
- * Instead of throwing an error (which crashes the app),
- * this version shows alert and returns false.
- */
+
 const getPermission = async (
   PermissionTypes: PermissionType[]
 ): Promise<boolean> => {
-  // Camera permission
   if (PermissionTypes.includes(PermissionType.Camera)) {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
@@ -39,7 +34,6 @@ const getPermission = async (
     }
   }
 
-  // Photo library permission
   if (PermissionTypes.includes(PermissionType.CameraRoll)) {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -59,9 +53,7 @@ const getPermission = async (
   return true;
 };
 
-/**
- * SAFELY choose camera
- */
+
 export const takePhoto = async (): Promise<string> => {
   // Request permissions
   const ok = await getPermission([
@@ -69,9 +61,8 @@ export const takePhoto = async (): Promise<string> => {
     PermissionType.CameraRoll,
   ]);
 
-  if (!ok) return ""; // Stop if denied
+  if (!ok) return ""; 
 
-  // Open camera
   const result = await ImagePicker.launchCameraAsync({
     quality: 0.8,
     base64: true,
@@ -86,7 +77,6 @@ export const takePhoto = async (): Promise<string> => {
   return result.assets[0].uri;
 };
 
-// Ensure directory exists
 async function ensureDir() {
   if (!CONTACT_PHOTO_DIR.exists) {
     CONTACT_PHOTO_DIR.create();
@@ -99,15 +89,13 @@ export async function saveImageToAppStorage(
 ): Promise<string> {
   await ensureDir();
 
-  // Generate a unique filename every time
   const extension = sourceUri.split(".").pop() || "jpg";
   const uniqueName = `${generateUUID()}.${extension}`;
 
   const newFile = new File(CONTACT_PHOTO_DIR.uri, uniqueName);
   const sourceFile = new File(sourceUri);
 
-  // Copy into the app folder (avoid conflicts)
   sourceFile.copy(newFile);
 
-  return newFile.uri; // Permanent location
+  return newFile.uri; 
 }

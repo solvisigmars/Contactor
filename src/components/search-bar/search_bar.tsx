@@ -13,7 +13,8 @@ export default function SearchBar({ search, setSearch }: Props){
       placeholder="Search..."
       value={search}
       onChangeText={setSearch}
-      style = {styles.search}
+      style={styles.search}
+      placeholderTextColor="#888"
     />
   )
 }
