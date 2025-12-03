@@ -1,5 +1,5 @@
-import { background, blue, darkGray } from '@/src/styles/colors';
-import { StyleSheet } from 'react-native';
+import { background, blue, darkGray } from "@/src/styles/colors";
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
@@ -10,14 +10,20 @@ export default StyleSheet.create({
 
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 20,
     color: darkGray,
   },
+  
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
   input: {
-    backgroundColor: '#eee',
+    backgroundColor: "#eee",
     padding: 15,
     marginVertical: 10,
     borderRadius: 10,
@@ -28,21 +34,21 @@ export default StyleSheet.create({
     backgroundColor: blue,
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 10,
   },
 
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 
   imagePreview: {
     width: 150,
     height: 150,
     borderRadius: 75,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginVertical: 20,
   },
 });

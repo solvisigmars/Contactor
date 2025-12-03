@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
+    backgroundColor: background,
     flex: 1,
     padding: 18,
     gap: 12,
@@ -14,34 +15,29 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    padding: 12,
-    borderWidth: 1,
-    borderRadius: 6,
-    backgroundColor: background,
-    borderColor: "black",
-    marginBottom: 10,
-    justifyContent: "center"
+    backgroundColor: "#eee",
+    padding: 15,
+    marginVertical: 10,
+    borderRadius: 10,
+    fontSize: 16,
   },
   imagePreview: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    borderWidth: 1,
-    borderColor: "black",
+    width: 150,
+    height: 150,
+    borderRadius: 75,
     alignSelf: "center",
+    marginVertical: 20,
   },
   buttonText: {
-    fontSize: 12,
     color: "white",
-    fontWeight: "bold"
+    fontSize: 18,
+    fontWeight: "bold",
   },
   button: {
-    width: 100,
-    height: 30,
-    borderRadius:20 ,
-    borderColor: "black",
-    justifyContent: "center",
+    backgroundColor: blue,
+    padding: 15,
+    borderRadius: 10,
     alignItems: "center",
-    backgroundColor: blue
+    marginVertical: 10,
   }
 })

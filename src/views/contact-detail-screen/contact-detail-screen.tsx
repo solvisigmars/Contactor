@@ -1,11 +1,11 @@
-import { useLocalSearchParams, useFocusEffect } from 'expo-router';
-import React, { useEffect, useState, useCallback } from 'react';
-import { ActivityIndicator, Image, Text, View } from 'react-native';
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { Image, Text, View } from "react-native";
 
-import { getContact } from '@/src/services/contact-service';
-import { Contact } from '@/src/types/Contact';
-import EditContactButton from '@/src/components/edit-contact-button/edit-contact-button';
-import styles from './styles';
+import EditContactButton from "@/src/components/edit-contact-button/edit-contact-button";
+import { getContact } from "@/src/services/contact-service";
+import { Contact } from "@/src/types/Contact";
+import styles from "./styles";
 
 export default function ContactDetailScreen() {
   const { id } = useLocalSearchParams();

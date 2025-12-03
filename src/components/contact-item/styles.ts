@@ -29,6 +29,6 @@ export default StyleSheet.create({
     fontSize: 18,
   },
   nameText:{
-    fontSize: 16
+    fontSize: 16,
   }
 })

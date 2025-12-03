@@ -1,7 +1,7 @@
-import { useLocalSearchParams, useFocusEffect, router } from "expo-router";
-import React, { useState, useCallback } from "react";
-import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { getContact, updateContact } from "@/src/services/contact-service";
 import { saveImageToAppStorage } from "@/src/services/image-service";
