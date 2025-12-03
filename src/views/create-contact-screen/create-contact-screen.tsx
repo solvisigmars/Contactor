@@ -1,9 +1,19 @@
-import { createContact } from "@/src/services/contact-service";
-import { takePhoto } from "@/src/services/image-service";
+import React, { useState } from "react";
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  Image, 
+  TouchableWithoutFeedback, 
+  Keyboard 
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
-import React, { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+
+import { createContact } from "@/src/services/contact-service";
+import { saveImageToAppStorage, takePhoto } from "@/src/services/image-service";
+
 import styles from "./styles";
 
 export default function NewContactScreen() {
@@ -13,7 +23,11 @@ export default function NewContactScreen() {
 
   async function pickImage() {
     await ImagePicker.requestMediaLibraryPermissionsAsync();
-    const result = await ImagePicker.launchImageLibraryAsync({ allowsEditing: true, quality: 1 });
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -24,52 +38,74 @@ export default function NewContactScreen() {
     if (uri !== "") {
       setImage(uri);
     }
-      
-    
+  }
+
+  async function handleCreate() {
+    let finalImage = null;
+
+    if (image) {
+      finalImage = await saveImageToAppStorage(image);
+    }
+
+    await createContact(name, phoneNumber, finalImage);
+    router.back();
   }
 
   return (
-    <View style = {styles.container}>
-      <Text style = {styles.title}>Create New Contact</Text>
-      {/** Name Input */}
-      <TextInput
-        placeholder="Enter name"
-        value={name}
-        onChangeText={setName}
-        style = {styles.input}
-      />
-      {/** Phone input */}
-      <TextInput
-        placeholder="Phone number"
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-        keyboardType="numeric"
-        style={styles.input}
-      />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Create New Contact</Text>
 
-      <TouchableOpacity onPress={pickImage} style={styles.button}>
-        <Text style={styles.buttonText}>Select Image</Text>
-      </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter name"
+          value={name}
+          onChangeText={setName}
+        />
 
-      <TouchableOpacity onPress={handleTakePhoto} style={styles.button}>
-        <Text style={styles.buttonText}>Take Photo</Text>
-      </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="Phone number"
+          keyboardType="phone-pad"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+        />
 
-      <Image
-        source={image ? { uri: image } : require("@/assets/images/icon.png")}
-        style={styles.imagePreview}
-      />
+        <TouchableOpacity onPress={pickImage} style={styles.button}>
+          <Text style={styles.buttonText}>Select Image</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={async () => {
-          await createContact(name, phoneNumber, image);
-          router.back();
-        }}
-        style = {styles.button}
-      >
-        <Text style = {styles.buttonText}>Confirm</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleTakePhoto} style={styles.button}>
+          <Text style={styles.buttonText}>Take Photo</Text>
+        </TouchableOpacity>
 
-    </View>
-  )
+        {/* ⭐ IMAGE OR PLACEHOLDER (IDENTICAL TO EDIT SCREEN) */}
+        <View style={styles.imageContainer}>
+          {image ? (
+            <View style={styles.imageWrapper}>
+              <Image style={styles.imagePreview} source={{ uri: image }} />
+
+              {/* ❌ REMOVE IMAGE BUTTON */}
+              <TouchableOpacity
+                style={styles.removeImageButton}
+                onPress={() => setImage(null)}
+              >
+                <Text style={styles.removeImageText}>×</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.placeholder}>
+              <Text style={styles.placeholderText}>
+                {name[0]?.toUpperCase() || "?"}
+              </Text>
+            </View>
+          )}
+        </View>
+
+        <TouchableOpacity onPress={handleCreate} style={styles.button}>
+          <Text style={styles.buttonText}>Confirm</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableWithoutFeedback>
+  );
 }

@@ -58,19 +58,14 @@ export default StyleSheet.create({
 
 
   imageWrapper: {
-    position: "relative",
-    alignSelf: "center",
-    marginVertical: 20,
     width: 150,
     height: 150,
     borderRadius: 75,
-  
-    // ⭐ shadow
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 4,
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    marginVertical: 20,
   },
   
 
