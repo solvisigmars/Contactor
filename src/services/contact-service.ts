@@ -37,7 +37,7 @@ export async function createContact(
   image: string | null
 ) {
   const id = generateUUID();
-  const fileName = `${name}-${id}.json`;
+  const filename = `${name}-${id}.json`;
 
   let finalImage = null;
 
@@ -52,7 +52,7 @@ export async function createContact(
     image: finalImage,
   };
 
-  await writeContactFile(fileName, newContact);
+  await writeContactFile(filename, newContact);
 
   return newContact;
 }

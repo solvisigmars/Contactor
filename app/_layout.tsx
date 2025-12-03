@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack screenOptions={{ headerBackTitleVisible: false }}>
+      <Stack screenOptions={{ headerShown: true }}>
         
         <Stack.Screen
           name="index"
@@ -13,17 +13,17 @@ export default function RootLayout() {
 
         <Stack.Screen
           name="contact/new-contact"
-          options={{ title: "New Contact", headerBackTitleVisible: false }}
+          options={{ headerShown: true, title: "New Contact", headerBackTitle: "" }}
         />
 
         <Stack.Screen
           name="contact/[id]"
-          options={{ title: "Contact Info", headerBackTitleVisible: false }}
+          options={{ headerShown: true, title: "Contact Details", headerBackTitle: "" }}
         />
 
         <Stack.Screen
           name="contact/[id]/edit"
-          options={{ title: "Edit Contact", headerBackTitleVisible: false }}
+          options={{ headerShown: true, title: "Edit Contacts", headerBackTitle: "" }}
         />
 
       </Stack>

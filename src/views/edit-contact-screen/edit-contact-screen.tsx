@@ -55,7 +55,7 @@ export default function EditContactScreen() {
   }
 
   async function saveChanges() {
-    if (!contact) return; // safety
+    if (!contact) return; 
 
     let finalImage = contact.image;
 
@@ -71,7 +71,7 @@ export default function EditContactScreen() {
       image: finalImage,
     });
 
-    router.back(); // go back to detail screen (now updated)
+    router.back(); 
   }
 
   if (!contact) {

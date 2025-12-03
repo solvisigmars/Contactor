@@ -30,13 +30,19 @@ export async function importContactFromOs() {
       continue;
     }
 
+    const phoneNumber = c.phoneNumbers?.[0]?.number;
+
+    if (phoneNumber === undefined || phoneNumber === null) {
+      continue; 
+    }
+
     const id = generateUUID();
     const filename = `${c.name}-${id}.json`;
 
-    const contactObj = {
+    const contactObj: Contact = {
       id,
       name: c.name,
-      phoneNumber: c.phoneNumbers[0].number,
+      phoneNumber: phoneNumber,
       image: c.image?.uri ?? null,
     };
 
