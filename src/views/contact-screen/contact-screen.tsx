@@ -14,7 +14,6 @@ export default function ContactsScreen() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [search, setSearch] = useState("");
 
-  // (Temporary) load fake contacts for UI testing
   useFocusEffect(
     useCallback(() => {
       const load = async () => {
@@ -43,9 +42,9 @@ export default function ContactsScreen() {
       {/* Render Contacts Lists */}
       <ContactsList list={visible} />
       {/* Redner Create New Contact */}
-      <View style = {styles.buttonRow}>
+      <View style={styles.buttonRow}>
         <CreateContactButton />
-        <ImportFromOsButton setContacts = {setContacts} />
+        <ImportFromOsButton setContacts={setContacts} />
       </View>
     </View>
   );

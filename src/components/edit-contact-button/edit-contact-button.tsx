@@ -1,9 +1,9 @@
-import { router } from 'expo-router';
-import React from 'react';
-import { Button } from 'react-native';
+import { router } from "expo-router";
+import React from "react";
+import { Button } from "react-native";
 
 type Props = {
-  filename: string; 
+  filename: string;
 };
 
 export default function EditContactButton({ filename }: Props) {

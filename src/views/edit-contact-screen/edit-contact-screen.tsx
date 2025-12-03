@@ -129,7 +129,7 @@ export default function EditContactScreen() {
           <Text style={styles.buttonText}>Take Photo</Text>
         </TouchableOpacity>
 
-        {/* ⭐ IMAGE OR PLACEHOLDER */}
+        {/* IMAGE OR PLACEHOLDER */}
         <View style={styles.imageContainer}>
           {image ? (
             <View style={styles.imageWrapper}>

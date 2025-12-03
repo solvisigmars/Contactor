@@ -3,12 +3,12 @@ import { TextInput } from "react-native";
 import styles from "./styles";
 
 type Props = {
-  search : string;
-  setSearch : (text : string) => void;
+  search: string;
+  setSearch: (text: string) => void;
 };
 
-export default function SearchBar({ search, setSearch }: Props){
-  return(
+export default function SearchBar({ search, setSearch }: Props) {
+  return (
     <TextInput
       placeholder="Search..."
       value={search}
@@ -16,5 +16,5 @@ export default function SearchBar({ search, setSearch }: Props){
       style={styles.search}
       placeholderTextColor="#888"
     />
-  )
+  );
 }

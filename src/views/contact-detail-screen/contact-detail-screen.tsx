@@ -6,7 +6,7 @@ import {
   Linking,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 import EditContactButton from "@/src/components/edit-contact-button/edit-contact-button";
@@ -16,17 +16,17 @@ import styles from "./styles";
 
 export default function ContactDetailScreen() {
   const { id } = useLocalSearchParams();
-  
+
   const [contact, setContact] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     useCallback(() => {
       let isActive = true;
-  
+
       async function load() {
         if (!id) return;
-  
+
         try {
           const data = await getContact(id as string);
           if (isActive) setContact(data);
@@ -36,9 +36,9 @@ export default function ContactDetailScreen() {
           if (isActive) setLoading(false);
         }
       }
-  
+
       load();
-  
+
       return () => {
         isActive = false;
       };
@@ -63,7 +63,6 @@ export default function ContactDetailScreen() {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.editButtonContainer}>
         <EditContactButton filename={id as string} />
       </View>
@@ -87,7 +86,6 @@ export default function ContactDetailScreen() {
       >
         <Text style={styles.callButtonText}>Call</Text>
       </TouchableOpacity>
-
     </View>
   );
 }

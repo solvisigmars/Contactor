@@ -66,7 +66,7 @@ export default StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
-  
+
   textPlaceholder: {
     fontSize: 68,
     fontWeight: "bold",
@@ -80,14 +80,11 @@ export default StyleSheet.create({
     borderRadius: 12,
     marginTop: 20,
   },
-  
+
   callButtonText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
   },
-  
 });
-
-

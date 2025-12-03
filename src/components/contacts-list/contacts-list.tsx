@@ -8,11 +8,11 @@ type Props = {
 };
 
 export default function ContactsList({ list }: Props) {
-  return(
+  return (
     <FlatList
-      data={ list }
+      data={list}
       keyExtractor={(item) => item.id}
-      renderItem = { ({ item }) => <ContactItem contact = { item } /> }
+      renderItem={({ item }) => <ContactItem contact={item} />}
     />
-  )
+  );
 }
