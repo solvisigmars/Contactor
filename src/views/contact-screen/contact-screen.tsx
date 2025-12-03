@@ -1,5 +1,6 @@
 import ContactsList from "@/src/components/contacts-list/contacts-list";
 import CreateContactButton from "@/src/components/create-contact-button/create-contact-button";
+import ImportFromOsButton from "@/src/components/import-contact-from-os-button/import-contact-from-os-button";
 import SearchBar from "@/src/components/search-bar/search_bar";
 import { getAllContacts } from "@/src/services/contact-service";
 import { Contact } from "@/src/types/Contact";
@@ -42,7 +43,10 @@ export default function ContactsScreen() {
       {/* Render Contacts Lists */}
       <ContactsList list={visible} />
       {/* Redner Create New Contact */}
-      <CreateContactButton />
+      <View style = {styles.buttonRow}>
+        <CreateContactButton />
+        <ImportFromOsButton setContacts = {setContacts} />
+      </View>
     </View>
   );
 }
