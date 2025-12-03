@@ -8,7 +8,6 @@ import {
 import { saveImageToAppStorage } from "./image-service";
 import { generateUUID } from "./uuid-service";
 
-// Load all contacts
 export async function getAllContacts(): Promise<Contact[]> {
   const files = await listContactFiles();
 
@@ -19,7 +18,7 @@ export async function getAllContacts(): Promise<Contact[]> {
 
     contacts.push({
       ...contact,
-      filename: fileName, // now valid
+      filename: fileName, 
     });
   }
 
@@ -57,7 +56,6 @@ export async function createContact(
   return newContact;
 }
 
-// Update existing contact
 export async function updateContact(
   filename: string,
   updatedContact: Contact
@@ -65,12 +63,10 @@ export async function updateContact(
   await writeContactFile(filename, updatedContact);
 }
 
-// Delete a contact
 export async function deleteContact(filename: string) {
   await deleteContactFile(filename);
 }
 
-// Load single contact by filename
 export async function getContact(filename: string): Promise<Contact> {
   return await readContactFile(filename);
 }

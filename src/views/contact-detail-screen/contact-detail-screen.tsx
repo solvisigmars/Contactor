@@ -64,12 +64,10 @@ export default function ContactDetailScreen() {
   return (
     <View style={styles.container}>
 
-      {/* ⭐ EDIT BUTTON (top-right inside screen) */}
       <View style={styles.editButtonContainer}>
         <EditContactButton filename={id as string} />
       </View>
 
-      {/* PHOTO OR PLACEHOLDER */}
       {contact.image ? (
         <Image source={{ uri: contact.image }} style={styles.photo} />
       ) : (
@@ -80,11 +78,9 @@ export default function ContactDetailScreen() {
         </View>
       )}
 
-      {/* NAME & PHONE */}
       <Text style={styles.name}>{contact.name}</Text>
       <Text style={styles.phone}>{contact.phoneNumber}</Text>
 
-      {/* ⭐ GREEN CALL BUTTON */}
       <TouchableOpacity
         style={styles.callButton}
         onPress={() => Linking.openURL(`tel:${contact.phoneNumber}`)}

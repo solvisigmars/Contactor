@@ -55,7 +55,7 @@ export default StyleSheet.create({
     backgroundColor: "#ddd",
     justifyContent: "center",
     alignItems: "center",
-    overflow: "hidden", // keeps image inside circle
+    overflow: "hidden", 
   },
 
   imagePreview: {

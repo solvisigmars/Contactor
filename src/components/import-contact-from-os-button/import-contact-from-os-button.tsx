@@ -10,9 +10,9 @@ interface ImportFromOsButtonProps {
 export default function ImportFromOsButton({setContacts}: ImportFromOsButtonProps) {
   async function handleImport() {
     try {
-      await importContactFromOs();  // triggers OS import ✅ (file saving happens in the service)
-      const updated = await getAllContacts(); // reload local list ✅
-      setContacts(updated); // update UI ✅
+      await importContactFromOs();  
+      const updated = await getAllContacts(); 
+      setContacts(updated); 
 
       Alert.alert("Success", "Contacts imported!");
     } catch (e: any) {

@@ -1,17 +1,14 @@
 import { Directory, File, Paths } from "expo-file-system";
 import * as FileSystem from "expo-file-system/legacy";
 
-// Create contacts directory inside device storage
 export const CONTACTS_DIR = new Directory(Paths.document, "contacts");
 
-// Ensure folder exists
 export async function ensureContactsDir() {
   if (!CONTACTS_DIR.exists) {
     CONTACTS_DIR.create();
   }
 }
 
-// Read JSON contact file
 export async function readContactFile(filename: string) {
   await ensureContactsDir();
 
@@ -21,7 +18,6 @@ export async function readContactFile(filename: string) {
     throw new Error(`Contact file does not exist: ${filename}`);
   }
 
-  // ✔ REAL API that works in Expo
   const content = await FileSystem.readAsStringAsync(file.uri, {
     encoding: FileSystem.EncodingType.UTF8,
   });
@@ -29,7 +25,6 @@ export async function readContactFile(filename: string) {
   return JSON.parse(content);
 }
 
-// Write JSON file
 export async function writeContactFile(filename: string, data: object) {
   await ensureContactsDir();
 
@@ -40,7 +35,6 @@ export async function writeContactFile(filename: string, data: object) {
   });
 }
 
-// Delete JSON file
 export async function deleteContactFile(filename: string) {
   await ensureContactsDir();
 
@@ -51,7 +45,6 @@ export async function deleteContactFile(filename: string) {
   }
 }
 
-// List all contact files
 export async function listContactFiles() {
   await ensureContactsDir();
 

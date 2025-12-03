@@ -26,7 +26,6 @@ export default function EditContactScreen() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [image, setImage] = useState<string | null>(null);
 
-  // Load the contact every time this screen is focused
   useFocusEffect(
     useCallback(() => {
       let isActive = true;
@@ -74,12 +73,10 @@ export default function EditContactScreen() {
 
     let finalImage = contact.image;
 
-    // If user picked a NEW image, save it permanently
     if (image && image !== contact.image) {
       finalImage = await saveImageToAppStorage(image);
     }
 
-    // If user removed the image
     if (image === null) {
       finalImage = null;
     }
@@ -109,17 +106,19 @@ export default function EditContactScreen() {
 
         <TextInput
           style={styles.input}
+          placeholder="Enter name"
           value={name}
           onChangeText={setName}
-          placeholder="Enter name"
+          placeholderTextColor="#888"
         />
 
         <TextInput
           style={styles.input}
+          placeholder="Phone number"
           value={phoneNumber}
           onChangeText={setPhoneNumber}
           keyboardType="phone-pad"
-          placeholder="Phone number"
+          placeholderTextColor="#888"
         />
 
         <TouchableOpacity style={styles.button} onPress={pickImage}>

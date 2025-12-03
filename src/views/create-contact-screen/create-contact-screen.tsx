@@ -61,14 +61,16 @@ export default function NewContactScreen() {
           placeholder="Enter name"
           value={name}
           onChangeText={setName}
+          placeholderTextColor="#888"
         />
 
         <TextInput
           style={styles.input}
           placeholder="Phone number"
-          keyboardType="phone-pad"
           value={phoneNumber}
           onChangeText={setPhoneNumber}
+          keyboardType="phone-pad"
+          placeholderTextColor="#888"
         />
 
         <TouchableOpacity onPress={pickImage} style={styles.button}>
@@ -79,13 +81,11 @@ export default function NewContactScreen() {
           <Text style={styles.buttonText}>Take Photo</Text>
         </TouchableOpacity>
 
-        {/* ⭐ IMAGE OR PLACEHOLDER (IDENTICAL TO EDIT SCREEN) */}
         <View style={styles.imageContainer}>
           {image ? (
             <View style={styles.imageWrapper}>
               <Image style={styles.imagePreview} source={{ uri: image }} />
 
-              {/* ❌ REMOVE IMAGE BUTTON */}
               <TouchableOpacity
                 style={styles.removeImageButton}
                 onPress={() => setImage(null)}
