@@ -1,16 +1,24 @@
 import * as ImagePicker from "expo-image-picker";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 import { getContact, updateContact } from "@/src/services/contact-service";
-import { saveImageToAppStorage } from "@/src/services/image-service";
+import { saveImageToAppStorage, takePhoto } from "@/src/services/image-service";
 import { Contact } from "@/src/types/Contact";
 
 import styles from "./styles";
 
 export default function EditContactScreen() {
-  const { id } = useLocalSearchParams(); // filename (e.g. Anna-uuid.json)
+  const { id } = useLocalSearchParams();
 
   const [contact, setContact] = useState<Contact | null>(null);
 
@@ -54,14 +62,26 @@ export default function EditContactScreen() {
     }
   }
 
+  async function handleTakePhoto() {
+    const uri = await takePhoto();
+    if (uri !== "") {
+      setImage(uri);
+    }
+  }
+
   async function saveChanges() {
-    if (!contact) return; 
+    if (!contact) return;
 
     let finalImage = contact.image;
 
     // If user picked a NEW image, save it permanently
     if (image && image !== contact.image) {
       finalImage = await saveImageToAppStorage(image);
+    }
+
+    // If user removed the image
+    if (image === null) {
+      finalImage = null;
     }
 
     await updateContact(id as string, {
@@ -71,7 +91,7 @@ export default function EditContactScreen() {
       image: finalImage,
     });
 
-    router.back(); 
+    router.back();
   }
 
   if (!contact) {
@@ -83,38 +103,58 @@ export default function EditContactScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Edit Contact</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Edit Contact</Text>
 
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
-        placeholder="Name"
-      />
+        <TextInput
+          style={styles.input}
+          value={name}
+          onChangeText={setName}
+          placeholder="Enter name"
+        />
 
-      <TextInput
-        style={styles.input}
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
-        keyboardType="phone-pad"
-        placeholder="Phone number"
-      />
+        <TextInput
+          style={styles.input}
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+          keyboardType="phone-pad"
+          placeholder="Phone number"
+        />
 
-      <TouchableOpacity style={styles.button} onPress={pickImage}>
-        <Text style={styles.buttonText}>Change Image</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={pickImage}>
+          <Text style={styles.buttonText}>Change Image</Text>
+        </TouchableOpacity>
 
-      <Image
-        style={styles.imagePreview}
-        source={
-          image ? { uri: image } : require("@/assets/images/icon.png")
-        }
-      />
+        <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
+          <Text style={styles.buttonText}>Take Photo</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={saveChanges} style={styles.button}>
-        <Text style={styles.buttonText}>Save Changes</Text>
-      </TouchableOpacity>
-    </View>
+        {/* ⭐ IMAGE OR PLACEHOLDER */}
+        <View style={styles.imageContainer}>
+          {image ? (
+            <View style={styles.imageWrapper}>
+              <Image style={styles.imagePreview} source={{ uri: image }} />
+              <TouchableOpacity
+                style={styles.removeImageButton}
+                onPress={() => setImage(null)}
+              >
+                <Text style={styles.removeImageText}>×</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.placeholder}>
+              <Text style={styles.placeholderText}>
+                {name[0]?.toUpperCase() || "?"}
+              </Text>
+            </View>
+          )}
+        </View>
+
+        <TouchableOpacity onPress={saveChanges} style={styles.button}>
+          <Text style={styles.buttonText}>Save Changes</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
