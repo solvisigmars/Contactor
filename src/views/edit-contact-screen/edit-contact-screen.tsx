@@ -3,12 +3,12 @@ import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
 import {
   Image,
+  Keyboard,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Keyboard,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
 
 import { getContact, updateContact } from "@/src/services/contact-service";
@@ -96,7 +96,7 @@ export default function EditContactScreen() {
 
   if (!contact) {
     return (
-      <View style={styles.center}>
+      <View>
         <Text>Loading...</Text>
       </View>
     );

@@ -1,50 +1,54 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Contactor
+## Description
+[A brief description of your React Native application.]
+## Table of Contents
+- Installation
+- Features
+- Technologies Used
+- Platform Support
+- Project Structure
+- Setup Instructions
+- Running the App
+- Testing
+- Screenshots
+- Known Issues
+- Future Improvements
+## Running the app
+### Navigate to project directory
+`cd your-project-name`
+### Install dependencies
+`npm install`
+### Running the App
+`npm run`
+## Technologies Used
+- React Native
+- React Navigation (if used)
+- State Management Solution (Redux/Context API/etc.)
+- [Any other major libraries/frameworks]
+## Platform Support
+### Primary Development Platform
+- Primary Platform: [iOS/Android]
+- Test Device: [e.g., iPhone 14 Pro/Samsung Galaxy S21]
+- OS Version: [e.g., iOS 16.5/Android 13]
+### Secondary Platform Testing
+- Secondary Platform: [iOS/Android]
+- Test Device: [e.g., iPhone 13/Google Pixel 6]
+- OS Version: [e.g., iOS 16.2/Android 12]
+- Testing Status: [Limited/Partial/Comprehensive]
+- Known Platform-Specific Issues: [List any issues specific to this
+platform]
+### Platform-Specific Features
+- Only state here if any
+## Setup Instructions
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- React Native CLI
+- Xcode (for iOS development)
+- Android Studio (for Android development)
+### Environment Setup
+1. Install React Native dependencies
+2. Configure development environment
+3. Set up emulators/simulators
+## Known Issues
+- [List issues]

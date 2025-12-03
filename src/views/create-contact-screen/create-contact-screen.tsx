@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
-  Image, 
-  TouchableWithoutFeedback, 
-  Keyboard 
-} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
+import React, { useState } from "react";
+import {
+  Image,
+  Keyboard,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
 
 import { createContact } from "@/src/services/contact-service";
 import { saveImageToAppStorage, takePhoto } from "@/src/services/image-service";
@@ -79,13 +79,13 @@ export default function NewContactScreen() {
           <Text style={styles.buttonText}>Take Photo</Text>
         </TouchableOpacity>
 
-        {/* ⭐ IMAGE OR PLACEHOLDER (IDENTICAL TO EDIT SCREEN) */}
+        {/*  IMAGE OR PLACEHOLDER */}
         <View style={styles.imageContainer}>
           {image ? (
             <View style={styles.imageWrapper}>
               <Image style={styles.imagePreview} source={{ uri: image }} />
 
-              {/* ❌ REMOVE IMAGE BUTTON */}
+              {/* REMOVE IMAGE BUTTON */}
               <TouchableOpacity
                 style={styles.removeImageButton}
                 onPress={() => setImage(null)}
