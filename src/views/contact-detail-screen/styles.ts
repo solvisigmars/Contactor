@@ -50,6 +50,13 @@ export default StyleSheet.create({
     fontWeight: "600",
   },
 
+  editButtonContainer: {
+    position: "absolute",
+    top: 20,
+    right: 20,
+    zIndex: 10,
+  },
+
   placeholder: {
     width: 140,
     height: 140,
@@ -64,6 +71,21 @@ export default StyleSheet.create({
     fontSize: 68,
     fontWeight: "bold",
     color: "#555",
+  },
+
+  callButton: {
+    backgroundColor: "#2ECC71", // green
+    paddingVertical: 14,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    marginTop: 20,
+  },
+  
+  callButtonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
   },
   
 });

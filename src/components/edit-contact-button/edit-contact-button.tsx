@@ -9,7 +9,7 @@ type Props = {
 export default function EditContactButton({ filename }: Props) {
   return (
     <Button
-      title="Edit contact"
+      title="Edit"
       onPress={() => router.push(`/contact/${filename}/edit`)}
     />
   );
