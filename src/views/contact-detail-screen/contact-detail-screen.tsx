@@ -1,13 +1,13 @@
-import { useLocalSearchParams, useFocusEffect } from 'expo-router';
-import React, { useState, useCallback } from 'react';
-import { 
-  Image, 
-  Text, 
-  View, 
-  ActivityIndicator, 
-  TouchableOpacity, 
-  Linking 
-} from 'react-native';
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import React, { useCallback, useState } from "react";
+import {
+  ActivityIndicator,
+  Image,
+  Linking,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 
 import EditContactButton from "@/src/components/edit-contact-button/edit-contact-button";
 import { getContact } from "@/src/services/contact-service";
