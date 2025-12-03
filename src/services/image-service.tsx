@@ -1,5 +1,6 @@
 import { Directory, File, Paths } from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
+import { Alert, Linking } from "react-native";
 
 export const CONTACT_PHOTO_DIR = new Directory(
   Paths.document,
@@ -11,44 +12,76 @@ enum PermissionType {
   CameraRoll,
 }
 
+/**
+ * Request permissions safely.
+ * Instead of throwing an error (which crashes the app),
+ * this version shows alert and returns false.
+ */
 const getPermission = async (
   PermissionTypes: PermissionType[]
-): Promise<void> => {
+): Promise<boolean> => {
+  // Camera permission
   if (PermissionTypes.includes(PermissionType.Camera)) {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
-      throw new Error("Camera permission not granted");
-    }
 
-    if (PermissionTypes.includes(PermissionType.CameraRoll)) {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== "granted") {
-        throw new Error("Media library permission not granted");
-      }
+    if (status !== "granted") {
+      Alert.alert(
+        "Camera Permission Needed",
+        "Please enable camera access in Settings to take a photo.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Open Settings", onPress: () => Linking.openSettings() },
+        ]
+      );
+      return false;
     }
   }
+
+  // Photo library permission
+  if (PermissionTypes.includes(PermissionType.CameraRoll)) {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== "granted") {
+      Alert.alert(
+        "Photo Library Permission Needed",
+        "Please enable photo library access in Settings.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Open Settings", onPress: () => Linking.openSettings() },
+        ]
+      );
+      return false;
+    }
+  }
+
+  return true;
 };
 
+/**
+ * SAFELY choose camera
+ */
 export const takePhoto = async (): Promise<string> => {
-  try{
-    await getPermission ([PermissionType.Camera, PermissionType.CameraRoll]);
+  // Request permissions
+  const ok = await getPermission([
+    PermissionType.Camera,
+    PermissionType.CameraRoll,
+  ]);
 
-    const result = await ImagePicker.launchCameraAsync({
-      quality: 0.8,
-      base64: true,
-      aspect: [1,1] as [number, number],
-      allowsEditing: true,
-    });
+  if (!ok) return ""; // Stop if denied
 
-    if (result.canceled) {
-      return "";
-    }
-    return result.assets[0].uri
-  } catch (error) {
-    console.error("Error taking photo,", error)
+  // Open camera
+  const result = await ImagePicker.launchCameraAsync({
+    quality: 0.8,
+    base64: true,
+    aspect: [1, 1] as [number, number],
+    allowsEditing: true,
+  });
+
+  if (result.canceled) {
+    return "";
   }
 
-  return "";
+  return result.assets[0].uri;
 };
 
 // Ensure directory exists
@@ -58,6 +91,9 @@ async function ensureDir() {
   }
 }
 
+/**
+ * Save image inside app storage
+ */
 export async function saveImageToAppStorage(
   sourceUri: string
 ): Promise<string> {
