@@ -1,7 +1,6 @@
 import { background, blue, darkGray } from "@/src/styles/colors";
 import { StyleSheet } from "react-native";
 
-
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -16,12 +15,6 @@ export default StyleSheet.create({
     marginBottom: 20,
     color: darkGray,
   },
-  
-  center: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
 
   input: {
     backgroundColor: "#eee",
@@ -33,10 +26,11 @@ export default StyleSheet.create({
 
   button: {
     backgroundColor: blue,
-    padding: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
     borderRadius: 10,
     alignItems: "center",
-    marginVertical: 10,
+    marginTop: 12,
   },
 
   buttonText: {
@@ -45,17 +39,14 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
 
-  imagePreview: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: "#ddd",
-    justifyContent: "center",
-    alignItems: "center",
+  imageContainer: {
     alignSelf: "center",
     marginVertical: 20,
+    width: 150,
+    height: 150,
+    justifyContent: "center",
+    alignItems: "center",
   },
-
 
   imageWrapper: {
     width: 150,
@@ -64,29 +55,13 @@ export default StyleSheet.create({
     backgroundColor: "#ddd",
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
-    marginVertical: 20,
+    overflow: "hidden", // keeps image inside circle
   },
-  
 
-  removeImageButton: {
-    position: "absolute",
-    top: 5,          
-    right: 13,        
-    backgroundColor: "rgba(0,0,0,0.55)",
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 20,
-  },
-  
-  removeImageText: {
-    color: "white",
-    fontSize: 16,     
-    lineHeight: 16,
-    fontWeight: "400" 
+  imagePreview: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
   },
 
   placeholder: {
@@ -96,15 +71,31 @@ export default StyleSheet.create({
     backgroundColor: "#ddd",
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
-    marginVertical: 20,
   },
 
   placeholderText: {
-    fontSize: 48,      
+    fontSize: 48,
     fontWeight: "600",
     color: "#555",
   },
 
-  
+  removeImageButton: {
+    position: "absolute",
+    top: 5,
+    right: 13,
+    backgroundColor: "rgba(0,0,0,0.55)",
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 20,
+  },
+
+  removeImageText: {
+    color: "white",
+    fontSize: 16,
+    lineHeight: 16,
+    fontWeight: "400",
+  },
 });

@@ -26,8 +26,8 @@ export default StyleSheet.create({
 
   button: {
     backgroundColor: blue,
-    paddingHorizontal: 15,
     paddingVertical: 12,
+    paddingHorizontal: 15,
     borderRadius: 10,
     alignItems: "center",
     marginTop: 12,
@@ -49,12 +49,13 @@ export default StyleSheet.create({
   },
 
   imageWrapper: {
-    position: "relative",
     width: 150,
     height: 150,
     borderRadius: 75,
+    backgroundColor: "#ddd",
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden", // keeps image inside circle
   },
 
   imagePreview: {
@@ -90,7 +91,7 @@ export default StyleSheet.create({
     alignItems: "center",
     zIndex: 20,
   },
-  
+
   removeImageText: {
     color: "white",
     fontSize: 16,
